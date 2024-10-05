@@ -7,6 +7,8 @@ import pygame
 import os
 import json
 
+
+print("Give us a moment, we are starting up...")
 pygame.mixer.init()
 
 def play_startup_sound():
@@ -54,8 +56,8 @@ rpc.connect()
 def update_discord_presence(heading):
     try:
         rpc.update(
-            state=f"Drawing with heading {heading}°",
-            details="Using the vectoring tool",
+            state=f"Directing aircraft to heading {heading}°",
+            details="Vectoring aircraft in ATC24",
             large_image="logo",
             large_text="Vector24",
             start=time.time()
@@ -133,7 +135,7 @@ root.bind("<Double-Button-3>", clear_all_lines)
 
 def update_presence_loop():
     while True:
-        rpc.update(state="Idle", details="No active vectoring")
+        rpc.update(state="Idle", details="No active vectoring", large_image="logo", large_text="Vector24",)
         time.sleep(15)
 
 import threading
