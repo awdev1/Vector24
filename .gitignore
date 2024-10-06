@@ -3,4 +3,6 @@
 /main.spec
 /venv
 /main.spec
-/your_script.spev
+/your_script.spec
+/Vector24
+*.zip
