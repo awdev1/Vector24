@@ -23,27 +23,28 @@ def show_guide():
     1. **Drawing a Vector**: Left-click and hold to start drawing a line, and the heading will be displayed.
     2. **Permanent Line**: Right-click while holding the left-click to make the line permanent.
     3. **Clear All Lines**: Double right-click anywhere on the canvas.
-    4. **Discord Rich Presence**: Your drawing activity will appear on your Discord profile.
+    4. **Discord Rich Presence**: Your drawing activity will appear on your Discord profile (if enabled).
     5. **Keyboard Shortcuts**: No additional shortcuts are available, but you can use the mouse for all actions.
 
     Enjoy using the tool!
     """
     messagebox.showinfo("Guide to Vector24", guide_message)
 
-def check_first_time():
+def check_first_run():
     config_file = "config.json"
     if not os.path.exists(config_file):
         with open(config_file, "w") as f:
-            json.dump({"first_time": True}, f)  
+            json.dump({"first_run": True, "discord_rpc_enabled": True}, f)  # Add discord_rpc_enabled flag
+        return True, True
     else:
         with open(config_file, "r") as f:
             config_data = json.load(f)
-            return config_data.get("first_time", True)
+            return config_data.get("first_run", True), config_data.get("discord_rpc_enabled", True)  # Return both
 
-def update_first_time_status():
+def update_first_run_status():
     config_file = "config.json"
     with open(config_file, "w") as f:
-        json.dump({"first_time": False}, f) 
+        json.dump({"first_run": False, "discord_rpc_enabled": discord_rpc_enabled}, f)  # Save status
 
 start_x = 200
 start_y = 150
@@ -51,19 +52,27 @@ is_mouse_pressed = False
 
 client_id = '1292041649945444402'
 rpc = Presence(client_id)
-rpc.connect()
+
+# Discord RPC will only connect if enabled
+def connect_rpc():
+    if discord_rpc_enabled:
+        try:
+            rpc.connect()
+        except Exception as e:
+            print(f"Error connecting to Discord: {e}")
 
 def update_discord_presence(heading):
-    try:
-        rpc.update(
-            state=f"Directing aircraft to heading {heading}°",
-            details="Vectoring aircraft in ATC24",
-            large_image="logo",
-            large_text="Vector24",
-            start=time.time()
-        )
-    except Exception as e:
-        print(f"Error updating Discord Presence: {e}")
+    if discord_rpc_enabled:
+        try:
+            rpc.update(
+                state=f"Directing aircraft to heading {heading}°",
+                details="Vectoring aircraft in ATC24",
+                large_image="logo",
+                large_text="Vector24",
+                start=time.time()
+            )
+        except Exception as e:
+            print(f"Error updating Discord Presence: {e}")
 
 def update_heading(event):
     if is_mouse_pressed:
@@ -133,18 +142,26 @@ root.bind("<ButtonRelease-1>", reset_line)
 root.bind("<Button-3>", create_permanent_line)
 root.bind("<Double-Button-3>", clear_all_lines)
 
+# Update presence loop only runs if Discord RPC is enabled
 def update_presence_loop():
-    while True:
-        rpc.update(state="Idle", details="No active vectoring", large_image="logo", large_text="Vector24",)
-        time.sleep(15)
+    if discord_rpc_enabled:
+        while True:
+            rpc.update(state="Idle", details="No active vectoring", large_image="logo", large_text="Vector24",)
+            time.sleep(15)
 
 import threading
-presence_thread = threading.Thread(target=update_presence_loop, daemon=True)
-presence_thread.start()
 
-if check_first_time():
+# Check if this is the user's first time and load Discord RPC settings
+first_run, discord_rpc_enabled = check_first_run()
+
+if discord_rpc_enabled:
+    presence_thread = threading.Thread(target=update_presence_loop, daemon=True)
+    presence_thread.start()
+    connect_rpc()
+
+if first_run:
     show_guide()
-    update_first_time_status()
+    update_first_run_status()
 
 play_startup_sound()
 
