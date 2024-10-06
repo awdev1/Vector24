@@ -1,5 +1,5 @@
 # Vector24 User Guide
-
+Created by: aerosd and awdev_
 ### Vector24 is a simple tool for drawing vectors on your screen. Here’s how to use it:
 ## Features:
 
