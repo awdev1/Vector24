@@ -92,7 +92,7 @@ def update_discord_presence(heading):
         except Exception as e:
             logging.error("Error in update_discord_presence: %s", str(e))
 
-def update_heading(event):
+def update_heading(event, is_right_click=False):
     try:
         if is_mouse_pressed:
             mouse_x, mouse_y = event.x, event.y
@@ -116,6 +116,7 @@ def update_preview_line(event):
         if is_mouse_pressed and preview_line:
             mouse_x, mouse_y = event.x, event.y
             canvas.coords(preview_line, start_x, start_y, mouse_x, mouse_y)
+            update_heading(event, is_right_click=True)  # Update heading during right-click dragging
     except Exception as e:
         logging.error("Error in update_preview_line: %s", str(e))
         
@@ -163,10 +164,10 @@ def create_permanent_line(event):
                 rounded_heading = 360
 
             heading_label.config(text="Heading: {:.2f}".format(rounded_heading))
-            
             update_discord_presence(rounded_heading)
     except Exception as e:
         logging.error("Error in create_permanent_line: %s", str(e))
+        
 def clear_all_lines(event):
     try:
         canvas.delete("all")
@@ -252,8 +253,8 @@ root.attributes("-alpha", 0.35)
 root.attributes("-topmost", True)
 root.overrideredirect(False)
 
-heading_label = tk.Label(root, text="Heading: 0.00", bg="white", fg="black", font=("Arial", 12))
-heading_label.pack(pady=10)
+heading_label = tk.Label(root, text="Heading: 0.00", bg="white", fg="black", font=("Comic Sans MS", 12))
+heading_label.pack(pady=11)
 
 separator_canvas = tk.Canvas(root, width=400, height=2, bg="gray")
 separator_canvas.pack(fill="x")
@@ -275,7 +276,7 @@ root.bind("<Button-3>", create_permanent_line)
 root.bind("<Double-Button-3>", clear_all_lines)
 root.bind("<ButtonPress-3>", start_right_drawing) 
 root.bind("<ButtonRelease-3>", create_permanent_line) 
-root.bind("<B3-Motion>", update_preview_line)  
+root.bind("<B3-Motion>", update_preview_line)  # Update the heading during right-click dragging
 menu_bar = tk.Menu(root)
 root.config(menu=menu_bar)
 
