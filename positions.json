@@ -1,0 +1,91 @@
+{
+  "airports": {
+    "Cyprus": {
+      "Barra Airport": {
+        "TWR": "IBAR_TWR"
+      },
+      "Henstridge Airfield": {
+        "TWR": "IHEN_TWR"
+      },
+      "Larnaca Intl.": {
+        "TWR": "ILAR_TWR",
+        "CTR": "ILAR_CTR"
+      },
+      "McConnell AFB": {
+        "TWR": "IIAB_TWR"
+      },
+      "Paphos Intl.": {
+        "TWR": "IPAP_TWR"
+      }
+    },
+    "Grindavik": {
+      "Grindavik Airport": {
+        "TWR": "IGRV_TWR"
+      }
+    },
+    "Izolirani": {
+      "Al Najaf": {
+        "TWR": "IJAF_TWR"
+      },
+      "Izolirani Intl.": {
+        "TWR": "IZOL_TWR",
+        "CTR": "IZOL_CTR"
+      },
+      "RAF Scampton": {
+        "TWR": "ISCM_TWR"
+      }
+    },
+    "Orenji": {
+      "Saba Airport": {
+        "TWR": "IDCS_TWR"
+      },
+      "Tokyo Intl.": {
+        "TWR": "ITKO_TWR",
+        "CTR": "ITKO_CTR"
+      }
+    },
+    "Perth": {
+      "Lukla Airport": {
+        "TWR": "ILKL_TWR"
+      },
+      "Perth Intl.": {
+        "TWR": "IPPH_TWR",
+        "CTR": "IPPH_CTR"
+      }
+    },
+    "Rockford": {
+      "Air Base Garry": {
+        "TWR": "IGAR_TWR"
+      },
+      "Boltic Airfield": {
+        "TWR": "IBLT_TWR"
+      },
+      "Greater Rockford": {
+        "TWR": "IRFD_TWR",
+        "CTR": "IRFD_CTR"
+      },
+      "Mellor Intl.": {
+        "TWR": "IMLR_TWR"
+      },
+      "Training Centre": {
+        "TWR": "ITRC_TWR"
+      }
+    },
+    "Saint Barthelemy": {
+      "Saint Barthelemy": {
+        "TWR": "IBTH_TWR",
+        "CTR": "IBTH_CTR"
+      }
+    },
+    "Sauthamptona": {
+      "Sauthamptona Airport": {
+        "TWR": "ISAU_TWR"
+      }
+    },
+    "Skopelos": {
+      "Skopelos Airfield": {
+        "TWR": "ISKP_TWR"
+      }
+    }
+  }
+}
