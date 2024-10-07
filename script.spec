@@ -30,6 +30,6 @@ exe = EXE(
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
-    console=True,  # Set to True if you want a console window.
-    icon='icon.ico'  # Optional: Add this if you want an icon.
+    console=True,  
+    icon='icon.ico'  
 )
