@@ -1,6 +1,5 @@
 /dist
 /build
-/main.spec
 /venv
 *.spec
 ./Vector24
