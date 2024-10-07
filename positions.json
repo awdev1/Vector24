@@ -21,6 +21,9 @@
     "Grindavik": {
       "Grindavik Airport": {
         "TWR": "IGRV_TWR"
+      },
+      "Tavaro Seabase": {
+        "TWR": "TVO_TWR"
       }
     },
     "Izolirani": {
@@ -51,6 +54,9 @@
       "Perth Intl.": {
         "TWR": "IPPH_TWR",
         "CTR": "IPPH_CTR"
+      },
+      "Sea Haven": {
+        "TWR": "ISHV_TWR"
       }
     },
     "Rockford": {
@@ -69,6 +75,9 @@
       },
       "Training Centre": {
         "TWR": "ITRC_TWR"
+      },
+      "Waterloo": {
+        "TWR": "OWO_TWR"
       }
     },
     "Saint Barthelemy": {
