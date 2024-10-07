@@ -1,4 +1,4 @@
-# Vector24 - A controlling tool for ATC24 PTFS
+# Vector24 - A radar vectoring tool for ATC24 PTFS
 
 # DOWNLOAD FROM THE [RELEASES](https://github.com/awdev1/Vector24/releases) TAB ON THE RIGHT
 ### Created by: aerosd and awdev_
