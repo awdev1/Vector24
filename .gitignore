@@ -2,7 +2,6 @@
 /build
 /main.spec
 /venv
-/main.spec
-/your_script.spec
-/Vector24
+*.spec
+./Vector24
 *.zip
