@@ -252,14 +252,14 @@ root.attributes("-alpha", 0.35)
 root.attributes("-topmost", True)
 root.overrideredirect(False)
 
-heading_label = tk.Label(root, text="Heading: 0.00")
+heading_label = tk.Label(root, text="Heading: 0.00", bg="white", fg="black", font=("Arial", 12))
 heading_label.pack(pady=10)
 
 separator_canvas = tk.Canvas(root, width=400, height=2, bg="gray")
 separator_canvas.pack(fill="x")
 separator_canvas.create_line(0, 1, 400, 1, fill="black")
 
-canvas = tk.Canvas(root, width=400, height=300)
+canvas = tk.Canvas(root, width=400, height=300, bg="white")
 canvas.pack(expand=True, fill="both")
 canvas.pack_propagate(False)
 
