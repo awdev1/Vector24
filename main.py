@@ -29,7 +29,7 @@ def show_guide():
     Welcome to Vector24!
 
     1. **Drawing a Vector**: Left-click and hold to start drawing a line, and the heading will be displayed.
-    2. **Permanent Line**: Right-click while holding the left-click to make the line permanent.
+    2. **Permanent Line (Approach Lines)**: Right-click and hold to start drawing a line to make the line permanent. This is useful for making ILS Runway Lines for approaches
     3. **Clear All Lines**: Double right-click anywhere on the canvas.
     4. **Discord Rich Presence**: Your drawing activity will appear on your Discord profile (if enabled).
     5. **Selecting ATC Positions**: Navigate to the "Position" menu to choose your ATC position from a list of available airports.
@@ -153,9 +153,20 @@ def create_permanent_line(event):
             if preview_line is not None:
                 canvas.delete(preview_line)
                 preview_line = None
+            dx = mouse_x - start_x
+            dy = start_y - mouse_y
+            angle = math.atan2(dy, dx)
+            heading = (math.degrees(angle) + 360) % 360
+            heading = (90 - heading) % 360
+            rounded_heading = round(heading / 5) * 5
+            if rounded_heading == 0:
+                rounded_heading = 360
+
+            heading_label.config(text="Heading: {:.2f}".format(rounded_heading))
+            
+            update_discord_presence(rounded_heading)
     except Exception as e:
         logging.error("Error in create_permanent_line: %s", str(e))
-
 def clear_all_lines(event):
     try:
         canvas.delete("all")
