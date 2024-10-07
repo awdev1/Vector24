@@ -5,6 +5,7 @@
 
 
 Vector24 is a sleek and simple vector drawing tool designed for quick visualization and interaction. It allows users to draw vectors on their screen with real-time heading (angle) feedback and the ability to make lines permanent or clear all drawings with ease.
+
 Key Features:
 
     Interactive Vector Drawing: Click and drag to draw vectors, with heading (angle) displayed dynamically.
