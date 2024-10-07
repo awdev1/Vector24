@@ -109,7 +109,16 @@ def update_heading(event):
             update_discord_presence(rounded_heading)
     except Exception as e:
         logging.error("Error in update_heading: %s", str(e))
-
+        
+def update_preview_line(event):
+    global preview_line
+    try:
+        if is_mouse_pressed and preview_line:
+            mouse_x, mouse_y = event.x, event.y
+            canvas.coords(preview_line, start_x, start_y, mouse_x, mouse_y)
+    except Exception as e:
+        logging.error("Error in update_preview_line: %s", str(e))
+        
 def update_start_point(event):
     global start_x, start_y, is_mouse_pressed, current_line
     try:
@@ -128,11 +137,22 @@ def reset_line(event):
     except Exception as e:
         logging.error("Error in reset_line: %s", str(e))
 
+def start_right_drawing(event):
+    global start_x, start_y, is_mouse_pressed, preview_line
+    start_x, start_y = event.x, event.y
+    is_mouse_pressed = True
+    preview_line = canvas.create_line(start_x, start_y, start_x, start_y, fill="blue", dash=(4, 2))
+
 def create_permanent_line(event):
-    global start_x, start_y
+    global is_mouse_pressed, preview_line
     try:
-        mouse_x, mouse_y = event.x, event.y
-        canvas.create_line(start_x, start_y, mouse_x, mouse_y)
+        if is_mouse_pressed:
+            mouse_x, mouse_y = event.x, event.y
+            canvas.create_line(start_x, start_y, mouse_x, mouse_y, fill="red")
+            is_mouse_pressed = False
+            if preview_line is not None:
+                canvas.delete(preview_line)
+                preview_line = None
     except Exception as e:
         logging.error("Error in create_permanent_line: %s", str(e))
 
@@ -150,7 +170,7 @@ def update_presence_loop():
         except Exception as e:
             logging.error("Error in update_presence_loop: %s", str(e))
     
-    # Call this method again after 15 seconds (15000 ms)
+
     root.after(15000, update_presence_loop)
 
 def load_positions(file_path):
@@ -224,6 +244,10 @@ root.overrideredirect(False)
 heading_label = tk.Label(root, text="Heading: 0.00")
 heading_label.pack(pady=10)
 
+separator_canvas = tk.Canvas(root, width=400, height=2, bg="gray")
+separator_canvas.pack(fill="x")
+separator_canvas.create_line(0, 1, 400, 1, fill="black")
+
 canvas = tk.Canvas(root, width=400, height=300)
 canvas.pack(expand=True, fill="both")
 canvas.pack_propagate(False)
@@ -238,7 +262,9 @@ root.bind("<Button-1>", update_start_point)
 root.bind("<ButtonRelease-1>", reset_line)
 root.bind("<Button-3>", create_permanent_line)
 root.bind("<Double-Button-3>", clear_all_lines)
-
+root.bind("<ButtonPress-3>", start_right_drawing) 
+root.bind("<ButtonRelease-3>", create_permanent_line) 
+root.bind("<B3-Motion>", update_preview_line)  
 menu_bar = tk.Menu(root)
 root.config(menu=menu_bar)
 
