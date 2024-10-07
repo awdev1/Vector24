@@ -6,6 +6,7 @@ Join our [Discord!](https://discord.gg/kyDgZbnHz3)
 
 Vector24 (VTR24) is a simple vector drawing tool made in python and overlays over the roblox minimap without violating TOS. It lets you click and drag to get the heading of an aircraft and draw an approach overlaying the map. This makes vectoring more easier now on ATC24 so you no longer have to guess your headings or where the approach is!
 
+
 Originally made for events - now made user friendly to allow anyone to vector as well as an event atc!
 
 ### Example of giving a vector
