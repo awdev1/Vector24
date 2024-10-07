@@ -4,7 +4,7 @@
 ### Created by: aerosd and awdev_
 
 
-Vector24 is a sleek and simple vector drawing tool designed for quick visualization and interaction. It allows users to draw vectors on their screen with real-time heading (angle) feedback and the ability to make lines permanent or clear all drawings with ease.
+Vector24 (VTR24) is a simple vector drawing tool made in python and overlays over the roblox minimap without violating TOS. It lets you click and drag to get the heading of an aircraft and draw an "ILS Approach" overlaying the map. This makes vectoring more easier now on ATC24 so you no longer have to guess your headings or where the approach is!
 
 Key Features:
 
