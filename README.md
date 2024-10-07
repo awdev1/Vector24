@@ -1,29 +1,12 @@
-# Vector24 User Guide
-Created by: aerosd and awdev_
-### Vector24 is a simple tool for drawing vectors on your screen. Here’s how to use it:
-## Features:
+# Vector24 - A controlling tool for ATC24 PTFS
 
-    Draw a Vector:
-        Left-click and drag to draw a line. The angle (heading) will be shown.
+### Created by: aerosd and awdev_
 
-    Make a Line Permanent:
-        Right-click while dragging to save the line. You can draw a new one afterward.
+Vector24 is a sleek and simple vector drawing tool designed for quick visualization and interaction. It allows users to draw vectors on their screen with real-time heading (angle) feedback and the ability to make lines permanent or clear all drawings with ease.
+Key Features:
 
-    Clear All Lines:
-        Double right-click anywhere on the canvas to remove all lines.
+    Interactive Vector Drawing: Click and drag to draw vectors, with heading (angle) displayed dynamically.
+    Position Selection: You can select you controlling position so people can see where you are controlling
+    Discord Rich Presence Integration: Automatically updates your Discord status to reflect drawing activity.
 
-    See Your Activity on Discord:
-        While drawing, your Discord status updates to show what you’re doing!
-
-    Startup Sound:
-        A sound plays when you open the tool.
-
-    First-Time User Guide:
-        The first time you use Vector24, a guide will pop up to help you.
-
-## How to Use:
-
-    Start Drawing: Click and hold the left mouse button, then move the mouse.
-    Save a Line: While holding the left button, right-click to make the line permanent.
-    Remove Lines: Double right-click to clear everything.
-    Check Your Angle: The heading of your vector is displayed at the top.
+Vector24 is a convenient and engaging tool for quick vector visualization, with added social integration through Discord.
