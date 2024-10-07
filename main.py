@@ -13,6 +13,7 @@ logging.basicConfig(filename='app.log', level=logging.ERROR,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
 print("Give us a moment, we are starting up...")
+print("Started! Have fun controlling!")
 pygame.mixer.init()
 
 def play_startup_sound():
@@ -252,7 +253,7 @@ root.attributes("-alpha", 0.35)
 root.attributes("-topmost", True)
 root.overrideredirect(False)
 
-heading_label = tk.Label(root, text="Heading: 0.00", bg="white", fg="black", font=("Comic Sans MS", 12))
+heading_label = tk.Label(root, text="Heading: 0", bg="white", fg="black", font=("Comic Sans MS", 12))
 heading_label.pack(pady=11)
 
 separator_canvas = tk.Canvas(root, width=400, height=2, bg="gray")
