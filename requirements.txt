@@ -1,0 +1,9 @@
+altgraph==0.17.4
+packaging==24.1
+pefile==2024.8.26
+pygame==2.6.1
+pyinstaller==6.10.0
+pyinstaller-hooks-contrib==2024.8
+pypresence @ https://github.com/qwertyquerty/pypresence/archive/master.zip#sha256=7648c8baead21cdb345a285ec67e849109a3f7ec7cd9053fd8b9bb17141eb4d6
+pywin32-ctypes==0.2.3
+setuptools==75.1.0
