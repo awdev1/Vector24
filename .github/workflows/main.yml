@@ -21,7 +21,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pyinstaller
+        pip install -r requirements.txt
 
     - name: Build executable with PyInstaller and spec file
       run: |
@@ -45,7 +45,7 @@ jobs:
         Move-Item -Path "version.json" -Destination "."
 
         # Create the zip file
-        & "C:\Program Files\7-Zip\7z.exe" a -tzip Vector24-ADDVNAME-amd64-win.zip Vector24.exe app.log config.json positions.json startup.mp3
+        & "C:\Program Files\7-Zip\7z.exe" a -tzip Vector24-ADDVNAME-amd64-win.zip Vector24.exe app.log config.json positions.json startup.mp3 version.json
 
     - name: Upload outer ZIP file as artifact
       uses: actions/upload-artifact@v3
