@@ -1,0 +1,44 @@
+name: Build and Package with PyInstaller
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'  # Set to your Python version
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyinstaller
+
+    - name: Build executable with PyInstaller and spec file
+      run: |
+        pyinstaller script.spec  # Use the spec file for the build
+
+    - name: List output directory
+      run: ls dist/
+
+    - name: Create ZIP package
+      run: |
+        zip -r packaged_app.zip dist/
+
+    - name: Upload ZIP file as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: packaged-app
+        path: packaged_app.zip
