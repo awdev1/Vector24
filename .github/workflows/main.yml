@@ -31,10 +31,12 @@ jobs:
         python -m PyInstaller script.spec 
     - name: List output directory
       run: ls dist/
+      
 
     - name: Create first ZIP file with exe and additional resources
       run: |
-        zip -r Vector24-ADDVNAME-amd64-win.zip dist/Vector24.exe app.log config.json positions.json startup.mp3
+        PowerShell -Command "Compress-Archive -Path dist/Vector24.exe, app.log, config.json, positions.json, startup.mp3 -DestinationPath Vector24-ADDVNAME-amd64-win.zip"
+
 
     - name: Upload outer ZIP file as artifact
       uses: actions/upload-artifact@v3
