@@ -104,7 +104,7 @@ def update_heading(event, is_right_click=False):
             rounded_heading = round(heading / 5) * 5
             if rounded_heading == 0:
                 rounded_heading = 360
-            heading_label.config(text="Heading: {}".format(int(rounded_heading)))
+            heading_label.config(text=f"Heading: {int(rounded_heading):03d}")
             canvas.coords(current_line, start_x, start_y, mouse_x, mouse_y)
             update_discord_presence(rounded_heading)
     except Exception as e:
