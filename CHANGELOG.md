@@ -8,3 +8,4 @@
 7. Bug - Changed how headings are displayed - thanks to @rishab-alt
 8. Enhancement - Added transparency slider - thanks to @AeroSD24
 9. Enhancement - Transparency now saves to config - thanks to @awdev1
+10. Enhancement - Added auto-updates - thanks to @awdev1
