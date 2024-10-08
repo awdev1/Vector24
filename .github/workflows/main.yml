@@ -3,14 +3,12 @@ name: Auto Compile
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
+      - main  # Only triggers on push to the 'main' branch
 
 jobs:
   build:
-    runs-on: windows-latest 
+    runs-on: windows-latest  # Set the runner to Windows
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -18,23 +16,23 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.x'  
+        python-version: '3.x'  # Adjust as necessary
         
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
         pip install pyinstaller
 
     - name: Build executable with PyInstaller and spec file
       run: |
-        pyinstaller script.spec  
+        pyinstaller script.spec  # Ensure the correct .spec file is specified
+
     - name: List output directory
       run: dir
 
     - name: Install 7-Zip
       run: |
-        choco install 7zip.install -y 
+        choco install 7zip.install -y  # Using Chocolatey to install 7-Zip
 
     - name: Create ZIP file with specified resources
       run: |
