@@ -10,8 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
-
+    runs-on: windows-latest 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -25,24 +24,31 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install pyinstaller
-        
-    - name: Install 7-Zip
-      run: |
-        choco install 7zip.install -y  # Using Chocolatey to install 7-Zip
-        
+
     - name: Build executable with PyInstaller and spec file
       run: |
-        python -m PyInstaller script.spec 
+        pyinstaller script.spec  
     - name: List output directory
-      run: ls dist/
-      
+      run: dir
 
-    - name: Create first ZIP file with exe and additional resources
+    - name: Install 7-Zip
       run: |
-        & "C:\Program Files\7-Zip\7z.exe" a -tzip Vector24-ADDVNAME-amd64-win.zip dist\Vector24.exe app.log config.json positions.json startup.mp3
+        choco install 7zip.install -y 
+
+    - name: Create ZIP file with specified resources
+      run: |
+        # Move the necessary files to the root of the working directory before zipping
+        Move-Item -Path "dist\Vector24.exe" -Destination "."
+        Move-Item -Path "app.log" -Destination "."
+        Move-Item -Path "config.json" -Destination "."
+        Move-Item -Path "positions.json" -Destination "."
+        Move-Item -Path "startup.mp3" -Destination "."
+
+        # Create the zip file
+        & "C:\Program Files\7-Zip\7z.exe" a -tzip Vector24-ADDVNAME-amd64-win.zip Vector24.exe app.log config.json positions.json startup.mp3
 
     - name: Upload outer ZIP file as artifact
       uses: actions/upload-artifact@v3
       with:
-        name: Vector24-ADDVNAME-amd64-win
+        name: final-zip-package
         path: Vector24-ADDVNAME-amd64-win.zip
