@@ -197,6 +197,14 @@ def load_positions(file_path):
         logging.error("Error in load_positions: %s", str(e))
         return {}
 
+
+
+def update_transparency(value):
+    try:
+        root.attributes("-alpha", float(value))
+    except Exception as e:
+        logging.error("Error in update_transparency: %s", str(e))
+
 def toggle_rpc():
     try:
         if discord_rpc_enabled.get():
@@ -285,6 +293,19 @@ menu_bar.add_cascade(label="Options", menu=options_menu)
 
 discord_rpc_enabled = tk.BooleanVar(value=True)
 options_menu.add_checkbutton(label="Toggle Discord RPC", onvalue=True, offvalue=False, variable=discord_rpc_enabled, command=toggle_rpc)
+options_menu.add_separator()
+transparency_slider = tk.Scale(options_menu, from_=0.1, to=1.0, resolution=0.05, orient=tk.HORIZONTAL, command=update_transparency)
+transparency_slider.set(0.35)
+
+def open_transparency_window():
+    transparency_window = tk.Toplevel(root)
+    transparency_window.title("Adjust Transparency")
+    transparency_window.geometry("300x100")
+    transparency_slider = tk.Scale(transparency_window, from_=0.1, to=1.0, resolution=0.05, orient=tk.HORIZONTAL, command=update_transparency)
+    transparency_slider.set(0.35)  # Default transparency
+    transparency_slider.pack(fill='x', padx=20, pady=20)
+
+options_menu.add_command(label="Transparency", command=open_transparency_window)
 
 atc_menu = tk.Menu(menu_bar, tearoff=0)
 menu_bar.add_cascade(label="Position", menu=atc_menu)
