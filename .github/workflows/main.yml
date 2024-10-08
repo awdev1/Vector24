@@ -19,7 +19,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.x'  # Adjust the Python version as needed
+        python-version: '3.x'  
         
     - name: Install dependencies
       run: |
@@ -41,5 +41,5 @@ jobs:
     - name: Upload outer ZIP file as artifact
       uses: actions/upload-artifact@v3
       with:
-        name: final-zip-package
+        name: Vector24-ADDVNAME-amd64-win
         path: Vector24-ADDVNAME-amd64-win.zip
