@@ -116,7 +116,7 @@ def update_preview_line(event):
         if is_mouse_pressed and preview_line:
             mouse_x, mouse_y = event.x, event.y
             canvas.coords(preview_line, start_x, start_y, mouse_x, mouse_y)
-            update_heading(event, is_right_click=True)  # Update heading during right-click dragging
+            update_heading(event, is_right_click=True)  
     except Exception as e:
         logging.error("Error in update_preview_line: %s", str(e))
         
@@ -284,7 +284,7 @@ root.bind("<Button-3>", create_permanent_line)
 root.bind("<Double-Button-3>", clear_all_lines)
 root.bind("<ButtonPress-3>", start_right_drawing) 
 root.bind("<ButtonRelease-3>", create_permanent_line) 
-root.bind("<B3-Motion>", update_preview_line)  # Update the heading during right-click dragging
+root.bind("<B3-Motion>", update_preview_line)  
 menu_bar = tk.Menu(root)
 root.config(menu=menu_bar)
 
@@ -302,7 +302,7 @@ def open_transparency_window():
     transparency_window.title("Adjust Transparency")
     transparency_window.geometry("300x100")
     transparency_slider = tk.Scale(transparency_window, from_=0.1, to=1.0, resolution=0.05, orient=tk.HORIZONTAL, command=update_transparency)
-    transparency_slider.set(0.35)  # Default transparency
+    transparency_slider.set(0.35) 
     transparency_slider.pack(fill='x', padx=20, pady=20)
 
 options_menu.add_command(label="Transparency", command=open_transparency_window)
