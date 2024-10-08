@@ -18,7 +18,6 @@ pygame.mixer.init()
 
 logging.basicConfig(filename='app.log', level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s')
 
-# Get the local version from a version.json file
 def get_local_version():
     try:
         with open('version.json', 'r') as file:
@@ -28,11 +27,9 @@ def get_local_version():
         logging.error(f"Error reading local version: {str(e)}")
         return 'vector24-2.7.5-prod'
 
-# Check for updates on GitHub
+
 def check_for_updates_and_prompt():
-    repo_owner = "awdev1"
-    repo_name = "Vector24"
-    url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/releases/latest"
+    url = f"https://api.github.com/repos/awdev1/Vector24/releases/latest"
 
     try:
         response = requests.get(url)
@@ -41,17 +38,17 @@ def check_for_updates_and_prompt():
             latest_version = latest_release['tag_name']
             local_version = get_local_version()
 
-            # Compare versions
+
             if latest_version > local_version:
-                # Prompt user that an update is available
+
                 is_update_available = messagebox.askyesno(
                     "Update Available",
                     f"A new version ({latest_version}) is available. Would you like to download it now?"
                 )
                 
-                # If user clicks "Yes", open the GitHub release page
+
                 if is_update_available:
-                    webbrowser.open(latest_release['html_url'])  # Open the release URL in browser
+                    webbrowser.open(latest_release['html_url'])  
             else:
                 messagebox.showinfo("Up-to-date", "You are running the latest version.")
         else:
@@ -117,7 +114,7 @@ def update_config():
                 "first_run": False,
                 "discord_rpc_enabled": discord_rpc_enabled.get(),
                 "atc_position": atc_position,
-                "transparency": root.attributes("-alpha")  # Save current transparency
+                "transparency": root.attributes("-alpha")  
             }, f)
     except Exception as e:
         logging.error("Error in update_config: %s", str(e))
