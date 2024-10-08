@@ -6,3 +6,4 @@
 5. Bug - Fixed issue with preview line not showing on right-click drag - thanks to @awdev1
 6. Bug - Logging system improved to handle additional errors in playback and Discord RPC - thanks to @awdev1
 7. Bug - Changed how headings are displayed - thanks to @rishab-alt
+8. Enhancement - Added transparency slider - thanks to @AeroSD24
