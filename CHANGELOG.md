@@ -1,4 +1,4 @@
-# Changes from October
+# Version 2.5.0
 1. Enhancement - Added new airports - thanks to @aidenbok203
 2. Bug - Fixed typo in airports.json - thanks to @aidenbok203
 3. Enhancement - Improved radar functionality - thanks to @awdev1
