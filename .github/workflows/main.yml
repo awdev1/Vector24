@@ -30,9 +30,9 @@ jobs:
     - name: List output directory
       run: dir
 
-    - name: Install 7-Zip
-      run: |
-        choco install 7zip.install -y  # Using Chocolatey to install 7-Zip
+    #- name: Install 7-Zip
+     # run: |
+      #  choco install 7zip.install -y  # Using Chocolatey to install 7-Zip
 
     - name: Create ZIP file with specified resources
       run: |
