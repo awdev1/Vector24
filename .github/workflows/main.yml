@@ -28,7 +28,7 @@ jobs:
 
     - name: Build executable with PyInstaller and spec file
       run: |
-        pyinstaller your_script.spec  # Use the spec file for the build
+        pyinstaller script.spec  # Use the spec file for the build
 
     - name: List output directory
       run: ls dist/
