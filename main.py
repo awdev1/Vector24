@@ -163,7 +163,7 @@ def create_permanent_line(event):
             if rounded_heading == 0:
                 rounded_heading = 360
 
-            heading_label.config(text="Heading: {:.2f}".format(rounded_heading))
+            heading_label.config(text="Heading: {}".format(rounded_heading))
             update_discord_presence(rounded_heading)
     except Exception as e:
         logging.error("Error in create_permanent_line: %s", str(e))
@@ -171,7 +171,7 @@ def create_permanent_line(event):
 def clear_all_lines(event):
     try:
         canvas.delete("all")
-        heading_label.config(text="Heading: 0.00")
+        heading_label.config(text="Heading: 0")
     except Exception as e:
         logging.error("Error in clear_all_lines: %s", str(e))
 
