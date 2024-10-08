@@ -19,7 +19,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.x'
+        python-version: '3.x'  # Adjust the Python version as needed
         
     - name: Install dependencies
       run: |
@@ -28,8 +28,7 @@ jobs:
 
     - name: Build executable with PyInstaller and spec file
       run: |
-        pyinstaller script.spec  
-
+        python -m PyInstaller script.spec 
     - name: List output directory
       run: ls dist/
 
@@ -41,4 +40,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: final-zip-package
-        path: final_package/Vector24-ADDVNAME-amd64-win.zip
+        path: Vector24-ADDVNAME-amd64-win.zip
