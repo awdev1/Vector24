@@ -1,4 +1,4 @@
-name: Build and Package with PyInstaller
+name: Package only configuration files
 
 on:
   push:
@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -19,7 +19,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.x'  # Set to your Python version
+        python-version: '3.x'  # Adjust the Python version as per your project
 
     - name: Install dependencies
       run: |
@@ -28,17 +28,17 @@ jobs:
 
     - name: Build executable with PyInstaller and spec file
       run: |
-        pyinstaller script.spec  # Use the spec file for the build
+        pyinstaller your_script.spec  # Use the spec file for the build
 
     - name: List output directory
       run: ls dist/
 
-    - name: Create ZIP package
+    - name: Create ZIP file with required resources (excluding exe)
       run: |
-        zip -r packaged_app.zip dist/
+        zip -r packaged_resources.zip app.log config.json positions.json startup.mp3
 
     - name: Upload ZIP file as artifact
       uses: actions/upload-artifact@v3
       with:
-        name: packaged-app
-        path: packaged_app.zip
+        name: packaged-resources
+        path: packaged_resources.zip
