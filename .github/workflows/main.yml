@@ -42,6 +42,7 @@ jobs:
         Move-Item -Path "config.json" -Destination "."
         Move-Item -Path "positions.json" -Destination "."
         Move-Item -Path "startup.mp3" -Destination "."
+        Move-Item -Path "version.json" -Destination "."
 
         # Create the zip file
         & "C:\Program Files\7-Zip\7z.exe" a -tzip Vector24-ADDVNAME-amd64-win.zip Vector24.exe app.log config.json positions.json startup.mp3

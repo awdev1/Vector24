@@ -8,13 +8,57 @@ import os
 import json
 import threading
 import logging
-
-logging.basicConfig(filename='app.log', level=logging.ERROR, 
-                    format='%(asctime)s - %(levelname)s - %(message)s')
+import requests
+import webbrowser 
 
 print("Give us a moment, we are starting up...")
 print("Started! Have fun controlling!")
 pygame.mixer.init()
+
+
+logging.basicConfig(filename='app.log', level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s')
+
+# Get the local version from a version.json file
+def get_local_version():
+    try:
+        with open('version.json', 'r') as file:
+            data = json.load(file)
+            return data.get('version')
+    except Exception as e:
+        logging.error(f"Error reading local version: {str(e)}")
+        return 'vector24-2.7.5-prod'
+
+# Check for updates on GitHub
+def check_for_updates_and_prompt():
+    repo_owner = "awdev1"
+    repo_name = "Vector24"
+    url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/releases/latest"
+
+    try:
+        response = requests.get(url)
+        if response.status_code == 200:
+            latest_release = response.json()
+            latest_version = latest_release['tag_name']
+            local_version = get_local_version()
+
+            # Compare versions
+            if latest_version > local_version:
+                # Prompt user that an update is available
+                is_update_available = messagebox.askyesno(
+                    "Update Available",
+                    f"A new version ({latest_version}) is available. Would you like to download it now?"
+                )
+                
+                # If user clicks "Yes", open the GitHub release page
+                if is_update_available:
+                    webbrowser.open(latest_release['html_url'])  # Open the release URL in browser
+            else:
+                messagebox.showinfo("Up-to-date", "You are running the latest version.")
+        else:
+            logging.error(f"Failed to check for updates. Status code: {response.status_code}")
+    except Exception as e:
+        logging.error(f"Error checking for updates: {str(e)}")
+
 
 def play_startup_sound():
     try:
@@ -43,15 +87,27 @@ def check_first_run():
     try:
         if not os.path.exists(config_file):
             with open(config_file, "w") as f:
-                json.dump({"first_run": True, "discord_rpc_enabled": True, "atc_position": "Tower"}, f)
-            return True, True, "Tower"
+                json.dump({
+                    "first_run": True,
+                    "discord_rpc_enabled": True,
+                    "atc_position": "Tower",
+                    "transparency": 0.35
+                }, f)
+            return True, True, "Tower", 0.35  
+            
         else:
             with open(config_file, "r") as f:
                 config_data = json.load(f)
-                return config_data.get("first_run", True), config_data.get("discord_rpc_enabled", True), config_data.get("atc_position", "Tower")
+                return (
+                    config_data.get("first_run", True),
+                    config_data.get("discord_rpc_enabled", True),
+                    config_data.get("atc_position", "Tower"),
+                    config_data.get("transparency", 0.35)  
+                )
+        
     except Exception as e:
         logging.error("Error in check_first_run: %s", str(e))
-        return True, True, "Tower"
+        return True, True, "Tower", 0.35  
 
 def update_config():
     config_file = "config.json"
@@ -60,10 +116,12 @@ def update_config():
             json.dump({
                 "first_run": False,
                 "discord_rpc_enabled": discord_rpc_enabled.get(),
-                "atc_position": atc_position
+                "atc_position": atc_position,
+                "transparency": root.attributes("-alpha")  # Save current transparency
             }, f)
     except Exception as e:
         logging.error("Error in update_config: %s", str(e))
+
 
 client_id = '1292041649945444402'
 rpc = Presence(client_id)
@@ -202,6 +260,7 @@ def load_positions(file_path):
 def update_transparency(value):
     try:
         root.attributes("-alpha", float(value))
+        update_config()
     except Exception as e:
         logging.error("Error in update_transparency: %s", str(e))
 
@@ -261,7 +320,7 @@ root.attributes("-alpha", 0.35)
 root.attributes("-topmost", True)
 root.overrideredirect(False)
 
-heading_label = tk.Label(root, text="Heading: 0", bg="white", fg="black", font=("Comic Sans MS", 12))
+heading_label = tk.Label(root, text="Heading: 0", bg="white",fg="black", font=("Segoe UI", 12, "bold"))
 heading_label.pack(pady=11)
 
 separator_canvas = tk.Canvas(root, width=400, height=2, bg="gray")
@@ -290,7 +349,7 @@ root.config(menu=menu_bar)
 
 options_menu = tk.Menu(menu_bar, tearoff=0)
 menu_bar.add_cascade(label="Options", menu=options_menu)
-
+options_menu.add_command(label="Check for Updates", command=check_for_updates_and_prompt)
 discord_rpc_enabled = tk.BooleanVar(value=True)
 options_menu.add_checkbutton(label="Toggle Discord RPC", onvalue=True, offvalue=False, variable=discord_rpc_enabled, command=toggle_rpc)
 options_menu.add_separator()
@@ -301,8 +360,9 @@ def open_transparency_window():
     transparency_window = tk.Toplevel(root)
     transparency_window.title("Adjust Transparency")
     transparency_window.geometry("300x100")
-    transparency_slider = tk.Scale(transparency_window, from_=0.1, to=1.0, resolution=0.05, orient=tk.HORIZONTAL, command=update_transparency)
-    transparency_slider.set(0.35) 
+    transparency_slider = tk.Scale(transparency_window, from_=0.1, to=1.0, resolution=0.05, 
+                                   orient=tk.HORIZONTAL, command=update_transparency)
+    transparency_slider.set(transparency)  
     transparency_slider.pack(fill='x', padx=20, pady=20)
 
 options_menu.add_command(label="Transparency", command=open_transparency_window)
@@ -320,21 +380,20 @@ for airport, positions_dict in positions.items():
         airport_menu.add_cascade(label=airport_name, menu=tower_menu)
     atc_menu.add_cascade(label=airport, menu=airport_menu)
 
-first_run, rpc_status, atc_position = check_first_run()
-discord_rpc_enabled.set(rpc_status)
+first_run, rpc_status, atc_position, transparency = check_first_run()
+
+
+root.attributes("-alpha", transparency)
+
 
 if discord_rpc_enabled.get():
     connect_rpc()  
-    root.after(15000, update_presence_loop)  
-
+    root.after(15000, update_presence_loop)
 
 if first_run:
     show_guide()
     update_config()
-
+root.after(5000, check_for_updates_and_prompt)
 play_startup_sound()
 root.protocol("WM_DELETE_WINDOW", on_close)
 root.mainloop()
-
-if discord_rpc_enabled.get() and rpc_connected:
-    rpc.close()
