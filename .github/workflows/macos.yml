@@ -1,4 +1,4 @@
-name: Auto Compile on Commit
+name: Auto Compile on Commit (macOS)
 
 on:
   push:
@@ -29,12 +29,12 @@ jobs:
 
     - name: List contents of the output directory
       run: |
-        ls dist
+        ls -R dist  # Recursively list all files in the 'dist' directory
 
     - name: Prepare files for zipping
       run: |
         mkdir -p zip_temp
-        mv dist/Vector24.app zip_temp/
+        mv dist/Vector24 zip_temp/  # Adjust path based on actual build output
         mv app.log zip_temp/
         mv config.json zip_temp/
         mv positions.json zip_temp/
