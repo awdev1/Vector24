@@ -1,13 +1,13 @@
-name: Auto Compile on Commit (macOS)
+name: Auto Compile on Commit
 
 on:
   push:
     branches:
-      - main  # Only triggers on push to the 'main' branch
+      - main
 
 jobs:
   build:
-    runs-on: macos-13  # Set the runner to macOS
+    runs-on: macos-latest
 
     steps:
     - name: Checkout code
@@ -16,39 +16,37 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.x'  # Adjust as necessary
-        
+        python-version: '3.x'
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Build
+    - name: Build the application with PyInstaller
       run: |
-        pyinstaller macosscript.spec  # Ensure the correct .spec file is specified
+        pyinstaller script.spec
 
-    - name: List output directory
+    - name: List contents of the output directory
       run: |
-        ls dist  # List the contents of the dist directory
+        ls dist
 
-- name: Create ZIP
-  run: |
-    # Move necessary files to a temporary directory to avoid overwriting conflicts
-    mkdir -p zip_temp
+    - name: Prepare files for zipping
+      run: |
+        mkdir -p zip_temp
+        mv dist/Vector24.app zip_temp/
+        mv app.log zip_temp/
+        mv config.json zip_temp/
+        mv positions.json zip_temp/
+        mv startup.mp3 zip_temp/
+        mv version.json zip_temp/
 
-    # Move all files that should be zipped into the zip_temp directory
-    mv dist/Vector24.app zip_temp/
-    mv app.log zip_temp/
-    mv config.json zip_temp/
-    mv positions.json zip_temp/
-    mv startup.mp3 zip_temp/
-    mv version.json zip_temp/
+    - name: Create ZIP archive
+      run: |
+        cd zip_temp
+        zip -r ../Vector24-ADDVNAME-amd64-macos.zip ./*
 
-    # Create the zip file
-    cd zip_temp
-    zip -r ../Vector24-ADDVNAME-amd64-macos.zip ./*
-
-    - name: Upload
+    - name: Upload ZIP as an artifact
       uses: actions/upload-artifact@v3
       with:
         name: final-zip-package
