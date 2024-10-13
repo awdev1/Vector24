@@ -25,11 +25,11 @@ jobs:
 
     - name: Build the application with PyInstaller
       run: |
-        pyinstaller script.spec
+        pyinstaller --windowed --name Vector24 --icon icon.icns script.spec
 
     - name: List contents of the output directory
       run: |
-        ls -R dist  # Recursively list all files in 'dist'
+        ls -R dist
 
     - name: Prepare files for zipping
       run: |
