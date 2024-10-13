@@ -1,0 +1,54 @@
+name: Auto Compile on Commit
+
+on:
+  push:
+    branches:
+      - main  # Only triggers on push to the 'main' branch
+
+jobs:
+  build:
+    runs-on: macos-latest  # Set the runner to Windows
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'  # Adjust as necessary
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Build
+      run: |
+        pyinstaller script.spec  # Ensure the correct .spec file is specified
+
+    - name: List output directory
+      run: dir
+
+    #- name: Install 7-Zip
+     # run: |
+      #  choco install 7zip.install -y  # Using Chocolatey to install 7-Zip
+
+    - name: Create ZIP
+      run: |
+        # Move the necessary files to the root of the working directory before zipping
+        Move-Item -Path "dist\Vector24.exe" -Destination "."
+        Move-Item -Path "app.log" -Destination "."
+        Move-Item -Path "config.json" -Destination "."
+        Move-Item -Path "positions.json" -Destination "."
+        Move-Item -Path "startup.mp3" -Destination "."
+        Move-Item -Path "version.json" -Destination "."
+
+        # Create the zip file
+        & "C:\Program Files\7-Zip\7z.exe" a -tzip Vector24-ADDVNAME-amd64-win.zip Vector24.exe app.log config.json positions.json startup.mp3 version.json
+
+    - name: Upload
+      uses: actions/upload-artifact@v3
+      with:
+        name: final-zip-package
+        path: Vector24-ADDVNAME-amd64-win.zip
