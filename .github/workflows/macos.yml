@@ -25,7 +25,7 @@ jobs:
 
     - name: Build
       run: |
-        pyinstaller script.spec  # Ensure the correct .spec file is specified
+        pyinstaller macosscript.spec  # Ensure the correct .spec file is specified
 
     - name: List output directory
       run: |
