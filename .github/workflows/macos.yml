@@ -31,17 +31,22 @@ jobs:
       run: |
         ls dist  # List the contents of the dist directory
 
-    - name: Create ZIP
-      run: |
-        # Move the necessary files to the root of the working directory before zipping
-        mv dist/Vector24.app .  # Adjust to move the macOS app
-        mv config.json .
-        mv positions.json .
-        mv startup.mp3 .
-        mv version.json .
+- name: Create ZIP
+  run: |
+    # Move necessary files to a temporary directory to avoid overwriting conflicts
+    mkdir -p zip_temp
 
-        # Create the zip file
-        zip -r Vector24-ADDVNAME-amd64-macos.zip Vector24.app app.log config.json positions.json startup.mp3 version.json
+    # Move all files that should be zipped into the zip_temp directory
+    mv dist/Vector24.app zip_temp/
+    mv app.log zip_temp/
+    mv config.json zip_temp/
+    mv positions.json zip_temp/
+    mv startup.mp3 zip_temp/
+    mv version.json zip_temp/
+
+    # Create the zip file
+    cd zip_temp
+    zip -r ../Vector24-ADDVNAME-amd64-macos.zip ./*
 
     - name: Upload
       uses: actions/upload-artifact@v3
