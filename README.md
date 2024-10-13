@@ -1,6 +1,7 @@
 # Vector24 - A radar vectoring tool for ATC24 PTFS
 
 # DOWNLOAD FROM THE [RELEASES](https://github.com/awdev1/Vector24/releases) TAB ON THE RIGHT
+# Note: We have gotten elevated reports of anivirus blocking Vector. Do not use: Avast, Norton, or RAV Endpoint Protection. It is recommended you use something like bitdefender free.
 ### Created by: aerosd and awdev_
 Join our [Discord!](https://discord.gg/kyDgZbnHz3)
 
