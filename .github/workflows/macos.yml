@@ -35,7 +35,6 @@ jobs:
       run: |
         # Move the necessary files to the root of the working directory before zipping
         mv dist/Vector24.app .  # Adjust to move the macOS app
-        mv app.log .
         mv config.json .
         mv positions.json .
         mv startup.mp3 .
