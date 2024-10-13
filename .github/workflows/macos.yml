@@ -1,4 +1,4 @@
-name: Auto Compile on Commit
+name: Auto Compile on Commit (macOS)
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest  # Set the runner to Windows
+    runs-on: macos-13  # Set the runner to macOS
 
     steps:
     - name: Checkout code
@@ -28,27 +28,24 @@ jobs:
         pyinstaller script.spec  # Ensure the correct .spec file is specified
 
     - name: List output directory
-      run: dir
-
-    #- name: Install 7-Zip
-     # run: |
-      #  choco install 7zip.install -y  # Using Chocolatey to install 7-Zip
+      run: |
+        ls dist  # List the contents of the dist directory
 
     - name: Create ZIP
       run: |
         # Move the necessary files to the root of the working directory before zipping
-        Move-Item -Path "dist\Vector24.exe" -Destination "."
-        Move-Item -Path "app.log" -Destination "."
-        Move-Item -Path "config.json" -Destination "."
-        Move-Item -Path "positions.json" -Destination "."
-        Move-Item -Path "startup.mp3" -Destination "."
-        Move-Item -Path "version.json" -Destination "."
+        mv dist/Vector24.app .  # Adjust to move the macOS app
+        mv app.log .
+        mv config.json .
+        mv positions.json .
+        mv startup.mp3 .
+        mv version.json .
 
         # Create the zip file
-        & "C:\Program Files\7-Zip\7z.exe" a -tzip Vector24-ADDVNAME-amd64-win.zip Vector24.exe app.log config.json positions.json startup.mp3 version.json
+        zip -r Vector24-ADDVNAME-amd64-macos.zip Vector24.app app.log config.json positions.json startup.mp3 version.json
 
     - name: Upload
       uses: actions/upload-artifact@v3
       with:
         name: final-zip-package
-        path: Vector24-ADDVNAME-amd64-win.zip
+        path: Vector24-ADDVNAME-amd64-macos.zip
