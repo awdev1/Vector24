@@ -3,6 +3,12 @@
 # DOWNLOAD FROM THE [RELEASES](https://github.com/awdev1/Vector24/releases) TAB ON THE RIGHT
 # Note: We have gotten elevated reports of antivirus blocking Vector. Do not use: Avast, Norton, or RAV Endpoint Protection. It is recommended you use something like bitdefender free.
 ### Created by: aerosd and awdev_
+## How to install:
+### 1. Click the Releases tab on the right, or [here.](https://github.com/awdev1/Vector24/releases)
+### 2. Download the top asset, which will usually be labeled Vector24-X.X.X-amd64-win.zip
+### 3. Create a folder in a location of your liking, drag the .ZIP into the folder and unzip!
+### 4. Run the Vector24.exe and it's open!
+
 Join our [Discord!](https://discord.gg/kyDgZbnHz3)
 
 Vector24 (VTR24) is a simple vector drawing tool made in python and overlays over the roblox minimap without violating TOS. It lets you click and drag to get the heading of an aircraft and draw an approach/extended centreline overlaying the map. This makes vectoring more easier now on ATC24 so you no longer have to guess your headings or where the approach is!
