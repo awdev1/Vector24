@@ -35,19 +35,23 @@ jobs:
       run: |
         mkdir -p zip_temp
         mv dist/Vector24.app zip_temp/  # Moving the .app bundle
-        mv app.log zip_temp/
-        mv config.json zip_temp/
-        mv positions.json zip_temp/
-        mv startup.mp3 zip_temp/
-        mv version.json zip_temp/
+        [ -f app.log ] && mv app.log zip_temp/ || echo "app.log not found"
+        [ -f config.json ] && mv config.json zip_temp/ || echo "config.json not found"
+        [ -f positions.json ] && mv positions.json zip_temp/ || echo "positions.json not found"
+        [ -f startup.mp3 ] && mv startup.mp3 zip_temp/ || echo "startup.mp3 not found"
+        [ -f version.json ] && mv version.json zip_temp/ || echo "version.json not found"
+
+    - name: Set permissions for .app bundle
+      run: |
+        chmod -R 755 zip_temp/Vector24.app
 
     - name: Create ZIP archive
       run: |
         cd zip_temp
-        zip -r ../Vector24-ADDVNAME-amd64-macos.zip ./*
+        zip -r ../Vector24-${{ github.sha }}-amd64-macos.zip ./*
 
     - name: Upload ZIP as an artifact
       uses: actions/upload-artifact@v3
       with:
         name: final-zip-package
-        path: Vector24-ADDVNAME-amd64-macos.zip
+        path: Vector24-${{ github.sha }}-amd64-macos.zip
