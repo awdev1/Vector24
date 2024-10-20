@@ -21,10 +21,8 @@ pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
 exe = EXE(
     pyz,
     a.scripts,
-    a.binaries,
-    a.zipfiles,
-    a.datas,
     [],
+    exclude_binaries=True,
     name='Vector24',
     debug=False,
     bootloader_ignore_signals=False,
@@ -34,9 +32,19 @@ exe = EXE(
     icon='icon.icns',  # Ensure the icon file path is correct
 )
 
-app = BUNDLE(
+coll = COLLECT(
     exe,
+    a.binaries,
+    a.zipfiles,
+    a.datas,
+    strip=False,
+    upx=True,
+    name='Vector24'
+)
+
+app = BUNDLE(
+    coll,
     name='Vector24.app',  # The macOS .app bundle name
     icon='icon.icns',  # Path to the icon, ensure it's .icns format
-    bundle_identifier='com.awdev.vector24'  # Update if necessary
+    bundle_identifier='com.awdev.vector24',  # Update if necessary
 )
