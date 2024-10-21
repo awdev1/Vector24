@@ -34,8 +34,9 @@ jobs:
     - name: Prepare files for zipping
       run: |
         mkdir -p zip_temp
-        mv dist/Vector24.app zip_temp/  # Moving the .app bundle
+        mv dist/Vector24 zip_temp/  # Moving the .app bundle
         [ -f app.log ] && mv app.log zip_temp/ || echo "app.log not found"
+        [ -f start.sh ] && mv start.sh zip_temp/ || echo "app.log not found"
         [ -f config.json ] && mv config.json zip_temp/ || echo "config.json not found"
         [ -f positions.json ] && mv positions.json zip_temp/ || echo "positions.json not found"
         [ -f startup.mp3 ] && mv startup.mp3 zip_temp/ || echo "startup.mp3 not found"
@@ -43,7 +44,7 @@ jobs:
 
     - name: Set permissions for .app bundle
       run: |
-        chmod -R 755 zip_temp/Vector24.app
+        chmod -R 755 zip_temp/Vector24
 
     - name: Create ZIP archive
       run: |
