@@ -30,4 +30,4 @@ Key Features:
 
 - Interactive Vector Drawing: Click and drag to draw vectors, with heading (angle) displayed dynamically.
 - Position Selection: You can select you controlling position so people can see where you are controlling
-- Discord Rich Presence Integration: Automatically updates your Discord status to reflect drawing activity.
+- Discord Rich Presence Integration: Automatically updates your Discord status to reflect drawing activity and ATC Position.
