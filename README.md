@@ -7,7 +7,7 @@
 ### 1. Click the Releases tab on the right, or [here.](https://github.com/awdev1/Vector24/releases)
 ### 2. Download the top asset, which will usually be labeled Vector24-X.X.X-amd64-win.zip
 ### 3. Create a folder in a location of your liking, drag the .ZIP into the folder and unzip! (to unzip, right click and click extract all)!
-### 4. Run the Vector24.exe and it's open!
+### 4. Run the Vector24.exe,give it 15 seconds or so, and it's open!
 
 Join our [Discord!](https://discord.gg/kyDgZbnHz3)
 
