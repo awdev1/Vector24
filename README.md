@@ -7,7 +7,7 @@
 3. Create a folder in a location of your liking, drag the .ZIP into the folder and unzip! (to unzip, right click and click extract all)!
 4. Run the Vector24.exe, give it 15 seconds or so, and it's open!
 
-## How to install (Mac/Linux):
+## How to install (Mac):
 1. Click the Releases tab on the right, or [here.](https://github.com/awdev1/Vector24/releases)
 2. Download the top asset, which will usually be labeled Vector24-X.X.X-amd64-macos.zip
 3. Right click on the folder "Vector24-2", and click "New Terminal at Folder"
