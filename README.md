@@ -1,13 +1,23 @@
-# Vector24 - A radar vectoring tool for ATC24 PTFS - Scroll down for guide to install
+# Vector24 - A radar vectoring tool for ATC24 PTFS
 
-# DOWNLOAD FROM THE [RELEASES](https://github.com/awdev1/Vector24/releases) TAB ON THE RIGHT
 # Note: We have gotten elevated reports of antivirus blocking Vector. Do not use: Avast, Norton, or RAV Endpoint Protection. It is recommended you use something like BitDefender Free in general. 
-### Created by: aerosd and awdev_
-## How to install: 
-### 1. Click the Releases tab on the right, or [here.](https://github.com/awdev1/Vector24/releases)
-### 2. Download the top asset, which will usually be labeled Vector24-X.X.X-amd64-win.zip
-### 3. Create a folder in a location of your liking, drag the .ZIP into the folder and unzip! (to unzip, right click and click extract all)!
-### 4. Run the Vector24.exe, give it 15 seconds or so, and it's open!
+## How to install (Windows):
+1. Click the Releases tab on the right, or [here.](https://github.com/awdev1/Vector24/releases)
+2. Download the top asset, which will usually be labeled Vector24-X.X.X-amd64-win.zip
+3. Create a folder in a location of your liking, drag the .ZIP into the folder and unzip! (to unzip, right click and click extract all)!
+4. Run the Vector24.exe, give it 15 seconds or so, and it's open!
+
+## How to install (Mac/Linux):
+1. Click the Releases tab on the right, or [here.](https://github.com/awdev1/Vector24/releases)
+2. Download the top asset, which will usually be labeled Vector24-X.X.X-amd64-macos.zip
+3. Right click on the folder "Vector24-2", and click "New Terminal at Folder"
+4. Within in the terminal, type in `sh ./start.sh`
+
+Note that your device may tell you that it "cannot be opened as it is from an unidentified developer." In this case, follow the settings [here](https://support.apple.com/en-gb/guide/mac-help/mh40616/mac)
+
+<img width="714" alt="Screenshot 2024-11-22 at 8 36 27 AM" src="https://github.com/user-attachments/assets/d1038790-e0d2-44ae-90c0-91df68e925d5">
+
+---
 
 Join our [Discord!](https://discord.gg/kyDgZbnHz3)
 
