@@ -11,9 +11,9 @@
 1. Click the Releases tab on the right, or [here.](https://github.com/awdev1/Vector24/releases)
 2. Download the top asset, which will usually be labeled Vector24-X.X.X-amd64-macos.zip
 3. Right click on the folder "Vector24-2", and click "New Terminal at Folder"
-4. Within in the terminal, type in `sh ./start.sh`
+4. Within in the terminal, type in `./Vector24`
 
-Note that your device may tell you that it "cannot be opened as it is from an unidentified developer." In this case, follow the settings [here](https://support.apple.com/en-gb/guide/mac-help/mh40616/mac)
+### Note that your device may tell you that it "cannot be opened as it is from an unidentified developer." In this case, follow the settings [here](https://support.apple.com/en-gb/guide/mac-help/mh40616/mac)
 
 <img width="714" alt="Screenshot 2024-11-22 at 8 36 27 AM" src="https://github.com/user-attachments/assets/d1038790-e0d2-44ae-90c0-91df68e925d5">
 
