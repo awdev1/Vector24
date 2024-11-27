@@ -1,4 +1,4 @@
-# Version 2.7.5
+# Version 2.7.5 test
 1. Enhancement - Added transparency slider - thanks to @AeroSD24
 2. Enhancement - Transparency now saves to config - thanks to @awdev1
 3. Enhancement - Added auto-updates - thanks to @awdev1
