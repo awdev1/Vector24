@@ -4,6 +4,7 @@
 3. Enhancement - Added auto-updates - thanks to @awdev1
 4. Enhancement - Added MacOS support - thanks to @awdev1
 5. Enhancement - Updated user instructions for MacOS - thanks to @aidenbok203
+6. Enhancement - Added issue and PR templates - thanks to @aidenbok203
 
 # Version 2.5.0
 1. Enhancement - Added new airports - thanks to @aidenbok203
