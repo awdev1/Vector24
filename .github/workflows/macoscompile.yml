@@ -52,7 +52,7 @@ jobs:
         zip -r ../Vector24-${{ github.sha }}-amd64-macos.zip ./*
 
     - name: Upload ZIP as an artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: final-zip-package
         path: Vector24-${{ github.sha }}-amd64-macos.zip
