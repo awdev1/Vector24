@@ -7,6 +7,8 @@
 3. Create a folder in a location of your liking, drag the .ZIP into the folder and unzip! (to unzip, right click and click extract all)!
 4. Run the Vector24.exe, give it 15 seconds or so, and it's open!
 
+Here's a video: https://youtu.be/P-YAk4q_sg8
+
 ## How to install (Mac):
 1. Click the Releases tab on the right, or [here.](https://github.com/awdev1/Vector24/releases)
 2. Download the top asset, which will usually be labeled Vector24-X.X.X-amd64-macos.zip
@@ -34,7 +36,6 @@ Originally made for Event ATC - now made user friendly to allow anyone to vector
 
 ### Example of an aircraft getting vectored onto final
 ![image](https://github.com/user-attachments/assets/a7b4ab72-3bfb-4197-991b-b72bcec3e1cb)
-
 
 Key Features:
 
